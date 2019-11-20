@@ -26,8 +26,14 @@ end)
 
 --- Mute wizard overcharge noise.
 mod:hook(WwiseWorld, "trigger_event", function(func, wwise_world, sound_event, ...)
-	if sound_event == "Play_weapon_staff_overcharge"
+	if (sound_event == "Play_weapon_staff_overcharge"
+		or sound_event == "Play_weapon_drakegun_overcharge")
 	and mod:get(mod.SETTING_NAMES.MUTE_OVERCHARGE_NOISE) then
+		return
+	end
+
+	if sound_event == "hud_ping_enemy"
+	and mod:get(mod.SETTING_NAMES.MUTE_ENEMY_PING) then
 		return
 	end
 
